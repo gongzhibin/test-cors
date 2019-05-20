@@ -1,6 +1,6 @@
-# front
+# cors
 
-> A Vue.js project
+> Test cors on express
 
 ## Build Setup
 
