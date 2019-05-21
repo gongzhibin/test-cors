@@ -23,6 +23,16 @@ app.post('/hello', function (req, res) {
   })
 })
 
+app.get('/jsonp', (req, res) => {
+  const { query } = req
+  const { name, age, callback } = query
+  const response = {
+    name,
+    age
+  }
+  res.end(callback + '(' + JSON.stringify(response) + ')')
+})
+
 app.listen(8081, function () {
   console.log('App listening on port 8081!')
 })
