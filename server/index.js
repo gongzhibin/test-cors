@@ -2,7 +2,8 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 
-app.use(bodyParser.json())
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // allow custom header and CORS
 app.all('*', function (req, res, next) {
@@ -16,7 +17,8 @@ app.all('*', function (req, res, next) {
     next()
   }
 })
-app.post('/hello', function (req, res) {
+
+app.post('/cors', function (req, res) {
   const { name } = req.body
   res.json({
     resMsg: `hello ${name}!`
@@ -31,6 +33,11 @@ app.get('/jsonp', (req, res) => {
     age
   }
   res.end(callback + '(' + JSON.stringify(response) + ')')
+})
+
+app.post('/iframePost', (req, res) => {
+  const { msg } = req.body
+  res.end(`This is post by ${msg}`)
 })
 
 app.listen(8081, function () {
